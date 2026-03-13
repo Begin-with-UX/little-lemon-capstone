@@ -1,24 +1,13 @@
 import { useState } from "react";
 
-function BookingForm() {
+function BookingForm({ availableTimes }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("17:00");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
 
-  const [availableTimes] = useState([
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-    "22:00",
-  ]);
-
   return (
-    <form
-      style={{ display: "grid", maxWidth: "200px", gap: "20px" }}
-    >
+    <form style={{ display: "grid", maxWidth: "200px", gap: "20px" }}>
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
@@ -34,7 +23,9 @@ function BookingForm() {
         onChange={(e) => setTime(e.target.value)}
       >
         {availableTimes.map((availableTime) => (
-          <option key={availableTime}>{availableTime}</option>
+          <option key={availableTime} value={availableTime}>
+            {availableTime}
+          </option>
         ))}
       </select>
 
@@ -54,12 +45,13 @@ function BookingForm() {
         id="occasion"
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
-      >
-        <option>None, Just Hungry</option>
-        <option>First Date</option>
-        <option>Birthday</option>
-        <option>Engagement</option>
-        <option>Anniversary</option>
+>
+        <option value="">Select Occasion</option>
+        <option value="None">None, Just Hungry</option>
+        <option value="Birthday">Birthday</option>
+        <option value="First Date">First Date</option>
+        <option value="Engagement">Engagement</option>
+        <option value="Anniversary">Anniversary</option>
       </select>
 
       <input type="submit" value="Make Your reservation" />
