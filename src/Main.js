@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 
+export const initializeTimes = () => {
+  return ["Select Time", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "1:00 pm", "1:30 pm", "2:00 pm", "3:00 pm", "3:30 pm", "4:00 pm", "4:30 pm", "5:00 pm", "5:30 pm", "6:00 pm", "7:00 pm", "7:30 pm", "8:00 pm", "8:30 pm", "9:00 pm"];
+};
+
+export const updateTimes = (state, action) => {
+  return ["Select Time", "11:00 am", "11:30 am", "12:00 pm", "12:30 pm", "1:00 pm", "1:30 pm", "2:00 pm", "3:00 pm", "3:30 pm", "4:00 pm", "4:30 pm", "5:00 pm", "5:30 pm", "6:00 pm", "7:00 pm", "7:30 pm", "8:00 pm", "8:30 pm", "9:00 pm"];
+};
+
 function Main() {
-  const [availableTimes, setAvailableTimes] = useState([
-    "Select Time",
-    "11:00am",
-    "12:00pm",
-    "1:00pm",
-    "2:00pm",
-    "3:00pm",
-    "4:00pm",
-    "5:00pm",
-    "6:00pm",
-    "7:00pm",
-  ]);
+  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
 
   return (
     <main>
@@ -26,7 +23,7 @@ function Main() {
           element={
             <BookingPage
               availableTimes={availableTimes}
-              setAvailableTimes={setAvailableTimes}
+              dispatch={dispatch}
             />
           }
         />

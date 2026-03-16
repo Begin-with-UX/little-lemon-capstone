@@ -1,10 +1,16 @@
 import { useState } from "react";
 
-function BookingForm({ availableTimes }) {
+function BookingForm({ availableTimes, dispatch }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("17:00");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
+
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    setDate(selectedDate);
+    dispatch({ type: "UPDATE_TIMES", date: selectedDate });
+  };
 
   return (
     <form style={{ display: "grid", maxWidth: "200px", gap: "20px" }}>
@@ -13,7 +19,7 @@ function BookingForm({ availableTimes }) {
         type="date"
         id="res-date"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={handleDateChange}
       />
 
       <label htmlFor="res-time">Choose time</label>
@@ -45,9 +51,9 @@ function BookingForm({ availableTimes }) {
         id="occasion"
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
->
-        <option value="">Select Occasion</option>
-        <option value="None">None, Just Hungry</option>
+      >
+        <option value="Select Occasion">Select Occasion</option>
+        <option value="None, Just Hungry">None, Just Hungry</option>
         <option value="Birthday">Birthday</option>
         <option value="First Date">First Date</option>
         <option value="Engagement">Engagement</option>
