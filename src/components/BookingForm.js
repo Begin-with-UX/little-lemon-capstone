@@ -4,7 +4,7 @@ function BookingForm({ availableTimes, dispatch }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("17:00");
   const [guests, setGuests] = useState(1);
-  const [occasion, setOccasion] = useState("Birthday");
+  const [occasion, setOccasion] = useState("");
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
@@ -12,8 +12,24 @@ function BookingForm({ availableTimes, dispatch }) {
     dispatch({ type: "UPDATE_TIMES", date: selectedDate });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      date,
+      time,
+      guests,
+      occasion,
+    };
+
+    console.log("Reservation submitted:", formData);
+  };
+
   return (
-    <form style={{ display: "grid", maxWidth: "200px", gap: "20px" }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "grid", maxWidth: "200px", gap: "20px" }}
+    >
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
@@ -43,7 +59,7 @@ function BookingForm({ availableTimes, dispatch }) {
         max="10"
         id="guests"
         value={guests}
-        onChange={(e) => setGuests(e.target.value)}
+        onChange={(e) => setGuests(Number(e.target.value))}
       />
 
       <label htmlFor="occasion">Occasion</label>
@@ -52,7 +68,7 @@ function BookingForm({ availableTimes, dispatch }) {
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
       >
-        <option value="Select Occasion">Select Occasion</option>
+        <option value="">Select Occasion</option>
         <option value="None, Just Hungry">None, Just Hungry</option>
         <option value="Birthday">Birthday</option>
         <option value="First Date">First Date</option>
