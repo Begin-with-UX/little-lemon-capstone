@@ -1,10 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function BookingForm({ availableTimes, dispatch }) {
+const formatTime = (time) => {
+  const [hour, minute] = time.split(":");
+  let h = parseInt(hour, 10);
+
+  const ampm = h >= 12 ? "PM" : "AM";
+  h = h % 12;
+
+  if (h === 0) {
+    h = 12;
+  }
+
+  return `${h}:${minute} ${ampm}`;
+};
+
+function BookingForm({ availableTimes, dispatch, submitForm }) {
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("17:00");
+  const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("");
+
+  const filteredTimes = availableTimes.filter((availableTime) => {
+    const hour = parseInt(availableTime.split(":")[0], 10);
+    return hour >= 11 && hour <= 22;
+  });
+
+  useEffect(() => {
+    if (filteredTimes.length > 0) {
+      setTime(filteredTimes[0]);
+    }
+  }, [filteredTimes]);
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
@@ -22,7 +47,7 @@ function BookingForm({ availableTimes, dispatch }) {
       occasion,
     };
 
-    console.log("Reservation submitted:", formData);
+    submitForm(formData);
   };
 
   return (
@@ -44,9 +69,9 @@ function BookingForm({ availableTimes, dispatch }) {
         value={time}
         onChange={(e) => setTime(e.target.value)}
       >
-        {availableTimes.map((availableTime) => (
+        {filteredTimes.map((availableTime) => (
           <option key={availableTime} value={availableTime}>
-            {availableTime}
+            {formatTime(availableTime)}
           </option>
         ))}
       </select>
@@ -54,7 +79,6 @@ function BookingForm({ availableTimes, dispatch }) {
       <label htmlFor="guests">Number of guests</label>
       <input
         type="number"
-        placeholder="1"
         min="1"
         max="10"
         id="guests"
