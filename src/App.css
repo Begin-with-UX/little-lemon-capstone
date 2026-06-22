@@ -1,3 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  background-color: #edefee;
+  color: #333333;
+}
+
+.site-header {
+  background-color: #edefee;
+  height: 110px;
+  padding: 0 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  height: 64px;
+  width: auto;
+  display: block;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #333333;
+
+  font-family: "Markazi Text", serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+  color: #495e57;
+}
+
+.main-nav a:focus {
+  outline: 3px solid #f4ce14;
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.hamburger-button {
+  display: none;
+  background: none;
+  border: none;
+  color: #333333;
+  font-size: 2.5rem;
+  cursor: pointer;
+  font-family: "Markazi Text", serif;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    position: relative;
+    height: 90px;
+    padding: 0 24px;
+  }
+
+  .site-logo {
+    height: 52px;
+  }
+
+  .hamburger-button {
+    display: block;
+  }
+
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    background-color: #edefee;
+    padding: 1.5rem 2rem;
+    z-index: 10;
+  }
+
+  .main-nav.open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .main-nav a {
+    font-size: 28px;
+  }
+}
+
 body {
   font-family: 'Karla', sans-serif;
   background-color: #edefee;
@@ -125,4 +234,189 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
     align-items: flex-start;
   }
+}
+
+.booking-page {
+  background-color: #edefee;
+  min-height: calc(100vh - 110px);
+  padding: 4rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.booking-heading {
+  font-family: "Markazi Text", serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 3rem;
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+}
+
+.booking-form {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+
+  background-color: #edefee;
+  border: 1px solid #495e57;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 10px 10px 18px rgba(0, 0, 0, 0.25);
+
+  display: grid;
+  gap: 1.75rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form-field label {
+  font-family: "Markazi Text", serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #495e57;
+}
+
+.form-field label span {
+  color: red;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  height: 64px;
+  border: 1px solid #9aa7a2;
+  border-radius: 8px;
+  background-color: #edefee;
+  padding: 0 1rem;
+  font-family: "Karla", sans-serif;
+  font-size: 20px;
+  color: #333333;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: 3px solid #f4ce14;
+  outline-offset: 2px;
+}
+
+.booking-submit {
+  height: 72px;
+  margin-top: 1rem;
+  border-radius: 16px;
+  border: 1px solid #333333;
+  background-color: #f4ce14;
+  color: #333333;
+  font-family: "Karla", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.3);
+}
+
+.booking-submit:hover:not(:disabled) {
+  background-color: #f7d633;
+}
+
+.booking-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 700px) {
+  .booking-heading {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form {
+    padding: 1.5rem;
+  }
+}
+
+.confirmation-page {
+  min-height: calc(100vh - 110px);
+  padding: 4rem 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  background-color: #edefee;
+}
+
+.confirmation-page h1 {
+  font-family: "Markazi Text", serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: #333333;
+
+  margin-bottom: 1rem;
+}
+
+.confirmation-page p {
+  font-family: "Karla", sans-serif;
+  font-size: 20px;
+  color: #333333;
+
+  max-width: 500px;
+  opacity: 0.8;
+
+  margin: 0;
+}
+
+.confirmation-button {
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+
+  border-radius: 16px;
+  border: 1px solid #333333;
+
+  background-color: #f4ce14;
+  color: #333333;
+
+  font-family: "Karla", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.confirmation-button:hover {
+  background-color: #f7d633;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #edefee;
+  color: #333333;
 }
